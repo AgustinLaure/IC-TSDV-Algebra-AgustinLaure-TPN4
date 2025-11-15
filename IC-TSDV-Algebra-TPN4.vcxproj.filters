@@ -9,5 +9,25 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Figure.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoundingBox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plane.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Figure.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BoundingBox.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plane.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

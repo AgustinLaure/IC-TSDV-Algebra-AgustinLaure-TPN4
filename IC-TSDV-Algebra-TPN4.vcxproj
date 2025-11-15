@@ -145,7 +145,15 @@ xcopy "$(SolutionDir)\res" "$(OutDir)\res" /y /i /e /s</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BoundingBox.cpp" />
+    <ClCompile Include="src\Figure.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Plane.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\BoundingBox.h" />
+    <ClInclude Include="src\Figure.h" />
+    <ClInclude Include="src\Plane.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

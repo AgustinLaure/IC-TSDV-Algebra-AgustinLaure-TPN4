@@ -1,13 +1,31 @@
+#include <vector>
+
 #include "raylib.h"
+
+#include "Figure.h"
 
 void cameraMove(Camera3D& camera, bool& isCursorOn, float delta);
 void drawWorldLines(Vector3 origin);
+void figuresUpdate(std::vector<figure::Figure*> figures, int maxFigures);
+void figuresDraw(std::vector<figure::Figure*> figures, int maxFigures);
 
 int main()
 {
     const float cameraSpeed = 25.0f;
 
     InitWindow(1280, 720, "TP_04");
+
+    int maxFigures = 0;
+    std::vector<figure::Figure*> figures;
+
+    figures.push_back(new figure::Figure("Cube", "res/models/cube.obj", { 0.0f,0.0f,0.0f }, { 1.0f,1.0f,1.0f },  { 0.0f,0.0f, 0.0f }, 0.05f * RAD2DEG, WHITE));
+    maxFigures++;
+
+    figures.push_back(new figure::Figure("Deca", "res/models/decahedron.obj", { 3.0f,0.0f,0.0f } , { 1.0f,1.0f,1.0f },  { 0.0f,0.0f, 0.0f }, 0.05f * RAD2DEG, WHITE));
+    maxFigures++;
+
+    figures.push_back(new figure::Figure("Octa", "res/models/octahedron.obj", { -3.0f,0.0f,0.0f } , { 1.0f,1.0f,1.0f },  { 0.0f,0.0f, 0.0f }, 0.05f * RAD2DEG, WHITE));
+    maxFigures++;
 
     Vector3 origin = { 0,0,0 };
     Camera3D camera = { 0 };
@@ -29,6 +47,7 @@ int main()
         //Update
         delta = GetFrameTime();
         cameraMove(camera, isCursorOn, delta);
+        figuresUpdate(figures,maxFigures);
 
         //Draw
         BeginDrawing();
@@ -36,6 +55,7 @@ int main()
         ClearBackground(BLACK);
 
         drawWorldLines(origin);
+        figuresDraw(figures, maxFigures);
 
         EndMode3D();
         EndDrawing();
@@ -73,4 +93,20 @@ void drawWorldLines(Vector3 origin)
     DrawLine3D(origin, { 10,0,0 }, RED);
     DrawLine3D(origin, { 0,10,0 }, GREEN);
     DrawLine3D(origin, { 0,0,10 }, BLUE);
+}
+
+void figuresUpdate(std::vector<figure::Figure*> figures, int maxFigures)
+{
+    for (int i = 0; i < maxFigures; i++)
+    {
+       
+    }
+}
+
+void figuresDraw(std::vector<figure::Figure*> figures, int maxFigures)
+{
+    for (int i = 0; i < maxFigures; i++)
+    {
+        figures[i]->draw();
+    }
 }
