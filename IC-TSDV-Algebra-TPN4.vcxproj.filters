@@ -18,6 +18,7 @@
     <ClCompile Include="src\Plane.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Frustum.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Figure.h">
@@ -29,5 +30,6 @@
     <ClInclude Include="src\Plane.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Frustum.h" />
   </ItemGroup>
 </Project>

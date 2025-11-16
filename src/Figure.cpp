@@ -4,13 +4,15 @@ namespace figure
 {
 	Figure::Figure(std::string name, std::string modelRef, Vector3 pos, Vector3 scale, Vector3 rotationAxis, float rotationAngle, Color color) : name(name), scale(scale), pos(pos), rotationAngle(rotationAngle), color(color)
 	{
+		isDrawable = false;
+
 		model = LoadModel(modelRef.c_str());
 
 		translateM = MatrixTranslate(pos.x, pos.y, pos.z);
 		rotationM = MatrixRotate(rotationAxis, rotationAngle);
 		scaleM = MatrixScale(scale.x, scale.y, scale.z);
 
-		model.transform = MatrixMultiply(MatrixMultiply(scaleM, rotationM), translateM);
+		initPositions();
 	}
 
 	Figure::~Figure() { UnloadModel(model); }
@@ -86,13 +88,6 @@ namespace figure
 		for (int i = 0; i < model.meshes[0].triangleCount; i++)
 		{
 			plane::Plane auxPlane = plane::Plane(vertices[i * 3], vertices[i * 3 + 1], vertices[i * 3 + 2]);
-
-			//Vector3 center = Vector3Transform(pos, translateM) - auxPlane.pos;
-			//
-			//if (Vector3DotProduct(auxPlane.norm, center) < 0)
-			//{
-			//	auxPlane.norm *= -1;
-			//}
 
 			planes[i] = auxPlane;
 		}

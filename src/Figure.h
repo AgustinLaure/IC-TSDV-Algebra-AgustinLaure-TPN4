@@ -13,6 +13,8 @@ class Figure
 {
 public:
 
+	bool isDrawable;
+
 	std::string name;
 	Model model;
 	Vector3 scale;

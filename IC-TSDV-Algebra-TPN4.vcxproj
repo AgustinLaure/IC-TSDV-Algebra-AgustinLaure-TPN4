@@ -147,12 +147,14 @@ xcopy "$(SolutionDir)\res" "$(OutDir)\res" /y /i /e /s</Command>
   <ItemGroup>
     <ClCompile Include="src\BoundingBox.cpp" />
     <ClCompile Include="src\Figure.cpp" />
+    <ClCompile Include="src\Frustum.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BoundingBox.h" />
     <ClInclude Include="src\Figure.h" />
+    <ClInclude Include="src\Frustum.h" />
     <ClInclude Include="src\Plane.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -12,4 +12,11 @@ namespace plane
 		pos = p1;
 	}
 	Plane::~Plane() {}
+
+	float Plane::getDotProduct(Vector3 point)
+	{
+		Vector3 diff = point - pos;
+
+		return Vector3DotProduct(diff, norm);
+	}
 }

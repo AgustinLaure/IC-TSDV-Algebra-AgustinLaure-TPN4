@@ -12,6 +12,8 @@ namespace plane
 
 		Plane(Vector3 p1, Vector3 p2, Vector3 p3);
 		~Plane();
+
+		float getDotProduct(Vector3 point);
 	};
 }
 
