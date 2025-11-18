@@ -12,7 +12,8 @@ enum class changeFrustum
 	Fov,
 	Near,
 	Far,
-	AspectRatio
+	Width,
+	Height
 };
 
 void cameraMove(Camera3D& camera, frustum::Frustum& frustum, bool& isCursorOn, float delta);
@@ -67,14 +68,31 @@ int main()
 		delta = GetFrameTime();
 		cameraMove(camera, frustum, isCursorOn, delta);
 		input(currentState, shouldDrawControls);
-		figuresUpdate(figures, maxFigures);
 		frustum.updatePos(camera);
+		figuresUpdate(figures, maxFigures);
 		frustum.update(figures, maxFigures);
 		changeFrustumValues(frustum, currentState, delta);
 
 		//Draw
+		
 		BeginDrawing();
 		BeginMode3D(camera);
+
+		DrawLine3D(frustum.vertices[0], frustum.vertices[1], GREEN);
+		DrawLine3D(frustum.vertices[1], frustum.vertices[2], GREEN);
+		DrawLine3D(frustum.vertices[2], frustum.vertices[3], GREEN);
+		DrawLine3D(frustum.vertices[3], frustum.vertices[0], GREEN);
+
+		DrawLine3D(frustum.vertices[4], frustum.vertices[5], GREEN);
+		DrawLine3D(frustum.vertices[5], frustum.vertices[6], GREEN);
+		DrawLine3D(frustum.vertices[6], frustum.vertices[7], GREEN);
+		DrawLine3D(frustum.vertices[7], frustum.vertices[4], GREEN);
+
+		DrawLine3D(frustum.vertices[0], frustum.vertices[4], GREEN);
+		DrawLine3D(frustum.vertices[1], frustum.vertices[5], GREEN);
+		DrawLine3D(frustum.vertices[2], frustum.vertices[6], GREEN);
+		DrawLine3D(frustum.vertices[3], frustum.vertices[7], GREEN);
+
 		ClearBackground(BLACK);
 
 		drawWorldLines(origin);
@@ -117,9 +135,13 @@ void input(changeFrustum& currentState, bool& shouldDrawControls)
 	{
 		currentState = changeFrustum::Far;
 	}
-	else if (IsKeyDown(KEY_P))
+	else if (IsKeyDown(KEY_V))
 	{
-		currentState = changeFrustum::AspectRatio;
+		currentState = changeFrustum::Width;
+	}
+	else if (IsKeyDown(KEY_H))
+	{
+		currentState = changeFrustum::Height;
 	}
 	else
 	{
@@ -165,11 +187,17 @@ void changeFrustumValues(frustum::Frustum& frustum, changeFrustum currentState, 
 				}
 				break;
 
-			case changeFrustum::AspectRatio:
-				if (frustum.width + change *300 > 0.0f && frustum.width + change * 300 > 0.0f)
+			case changeFrustum::Width:
+				if (frustum.width + change *100> 0.0f)
 				{
-					frustum.width += change * 300;
-					frustum.height += change * 300;
+					frustum.width += change * 100;
+				}
+				break;
+
+			case changeFrustum::Height:
+				if (frustum.height + change * 100 > 0.0f)
+				{
+					frustum.height += change * 100;
 				}
 				break;
 
@@ -215,7 +243,8 @@ void drawControls(changeFrustum currentState)
 	Color fovColor = WHITE;
 	Color nearColor = WHITE;
 	Color farColor = WHITE;
-	Color aspectColor = WHITE;
+	Color widthColor = WHITE;
+	Color heightColor = WHITE;
 
 	switch (currentState)
 	{
@@ -228,8 +257,11 @@ void drawControls(changeFrustum currentState)
 	case changeFrustum::Far:
 		farColor = GREEN;
 		break;
-	case changeFrustum::AspectRatio:
-		aspectColor = GREEN;
+	case changeFrustum::Width:
+		widthColor = GREEN;
+		break;
+	case changeFrustum::Height:
+		heightColor = GREEN;
 		break;
 	default:
 		break;
@@ -238,7 +270,8 @@ void drawControls(changeFrustum currentState)
 	DrawText("C (HOLD) select FOV", 40, 160, 20, fovColor);
 	DrawText("N (HOLD) select Near", 40, 190, 20, nearColor);
 	DrawText("F (HOLD) select far", 40, 220, 20, farColor);
-	DrawText("P (HOLD) aspect ratio", 40, 250, 20, aspectColor);
+	DrawText("V (HOLD) width", 40, 250, 20, widthColor);
+	DrawText("H (HOLD) height", 40, 280, 20, heightColor);
 }
 
 void drawWorldLines(Vector3 origin)

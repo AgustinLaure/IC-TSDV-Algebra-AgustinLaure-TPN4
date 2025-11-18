@@ -10,6 +10,8 @@ namespace frustum
 
 		cameraDir = Vector3Normalize(camera.target - camera.position);
 
+		fovy = fov * (height / width);
+
 		aspectRatio = width / height;
 
 		float halfFarHeight = tanf(fovy / 2) * far;
@@ -105,7 +107,9 @@ namespace frustum
 	{
 		cameraDir = Vector3Normalize(camera.target - camera.position);
 
-		fovy = fov * height / width;
+		aspectRatio = width / height;
+
+		fovy = fov / aspectRatio;
 
 		float halfFarHeight = tanf(fovy / 2) * far;
 		float halfFarWidth = halfFarHeight * aspectRatio;
